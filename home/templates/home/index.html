@@ -1,0 +1,79 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+<!-- index html according dynamic data, base.html according with static data -->
+
+<!-- created a block for title in base.html and when we want to change the title we don't need make any change in base.html, we can do here. -->
+{% block title %}{{mysite_name}}{%endblock%}
+
+<!-- block for headertext  -->
+{% block headertext %} HI Serdar! {% endblock %}
+
+<!-- block one for section -->
+
+{% block one %}
+<div class="image fit flush">
+    <img src="{% static 'home/images/pic02.jpg' %}" alt="" width="1177" height="443">
+</div>
+<header class="special">
+    <h2>Son Of The Sun</h2>
+    <p>vehicula urna sed justo bibendum</p>
+</header>
+<div class="content">
+    <p>Curabitur eget semper ante. Morbi eleifend ultricies est, a blandit diam vehicula vel. Vestibulum porttitor nisi
+        quis viverra hendrerit. Suspendisse vel volutpat nibh, vel elementum lacus. Maecenas commodo pulvinar dui, at
+        cursus metus imperdiet vel. Vestibulum et efficitur urna. Duis velit nulla, interdum sed felis sit amet,
+        facilisis auctor nunc. Cras luctus urna at risus feugiat scelerisque nec sed diam. </p>
+    <p>Nunc fringilla metus odio, at rutrum augue tristique vel. Nulla ac tellus a neque ullamcorper porta a vitae
+        ipsum. Morbi est sapien, hendrerit quis mi in, aliquam bibendum orci. Vestibulum imperdiet nibh vitae maximus
+        posuere. Aenean sit amet nibh feugiat, condimentum tellus eu, malesuada nunc. Mauris ac pulvinar turpis, sit
+        amet pharetra est. Ut bibendum justo condimentum, vehicula ex vel, venenatis libero. Etiam vehicula urna sed
+        justo bibendum, ac lacinia nunc pulvinar. Integer nec velit orci. Vestibulum pellentesque varius dapibus. Morbi
+        ullamcorper augue est, sed luctus orci fermentum dictum. Nunc tincidunt, nisl consequat convallis viverra, metus
+        nisl ultricies dui, vitae dapibus ligula urna sit amet nibh. Duis ut venenatis enim.</p>
+</div>
+{% endblock %}
+
+
+<!-- in below used for loop for same codes and reformated better. -->
+{% block two %}
+<header>
+    <h2>Son of the Moon</h2>
+    <p>vehicula urna sed justo bibendum</p>
+</header>
+<div class="content">
+    <div class="gallery">
+        {% for loop_index in '1234' %}
+        {% cycle 'home/images/pic03.jpg' 'home/images/pic01.jpg' 'home/images/pic04.jpg' 'home/images/pic05.jpg' as pic_url silent %}
+        <div>
+            <div class="image fit flush">
+                <a href="{% static pic_url %}"><img src="{% static pic_url %}" alt="" width="600" height="300"></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block three %}
+{% for header_text, paraph_text, pic_url in section3 %}
+{% cycle 'spotlight' 'spotlight alt' as class_value silent %}
+<div class="{{class_value}}">
+    <div class="image flush"><img src="{% static pic_url %}" alt="" width="700" height="525"></div>
+    <div class="inner">
+        <h3>{{header_text}}</h3>
+        <p>{{paraph_text}}</p>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+
+{% block footer%}
+<li><a href="https://thezuli.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+<li><a href="https://thezuli.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+<li><a href="https://thezuli.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+<li><a href="https://thezuli.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+{% endblock %}
